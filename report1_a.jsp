@@ -29,7 +29,7 @@
                     // Load Oracle Driver class file
                     Class.forName("org.postgresql.Driver");
                     String dbURL = "jdbc:postgresql:cse132b?user=postgres&password=970303";
-                    Connection conn = DriverManager.getConnection(dbURL);
+                    conn = DriverManager.getConnection(dbURL);
 
 
             %>
@@ -55,9 +55,9 @@
                         rsmd1 = rs.getMetaData();
                         columnCount1 = rsmd1.getColumnCount();
 
-                        <!-- ADD TITLE /CURRENT /NEXT_QUARTER / GRADE_OPT-->
+
                         PreparedStatement pstmt2 = conn.prepareStatement(
-                            "SELECT CLS.TITLE AS TITLE, CRS.COURSE_NUM AS COURSE, SECT.QUARTER AS QUARTER, CLS.CURRENT AS CURRENT, CLS.NEXT_QUARTER AS NEXT_QUARTER, SECT.YEAR AS YEAR, T.UNITS AS UNITS, SECT.SECTION_ID AS SECTION_ID, CRS.GRADE_OPT AS GRADE_OPT, SECT.FACULTY_NAME AS PROFESSOR FROM STUDENT STD, SECTION SECT, COURSE CRS, TAKES T , CLASS CLS WHERE STD.SSN = ? AND T.SSN = STD.SSN AND T.SECTION_ID = SECT.SECTION_ID AND SECT.COURSE_NUM = CRS.COURSE_NUM AND CLS.COURSE_NUM = CRS.COURSE_NUM");
+                            "SELECT CLS.TITLE AS TITLE, CRS.COURSE_NUM AS COURSE, SECT.QUARTER AS QUARTER, SECT.YEAR AS YEAR, T.UNITS AS UNITS, SECT.SECTION_ID AS SECTION_ID, CRS.GRADE_OPT AS GRADE_OPT, SECT.FACULTY_NAME AS PROFESSOR FROM STUDENT STD, SECTION SECT, COURSE CRS, TAKES T , CLASS CLS WHERE STD.SSN = ? AND T.SSN = STD.SSN AND T.SECTION_ID = SECT.SECTION_ID AND SECT.COURSE_NUM = CRS.COURSE_NUM AND CLS.COURSE_NUM = CRS.COURSE_NUM");
                         pstmt2.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs2 = pstmt2.executeQuery();
                         rsmd2 = rs2.getMetaData();
@@ -192,18 +192,6 @@
                             <td align="middle">
                                 <input value="<%= rs2.getString("QUARTER") %>"
                                     name="QUARTER" size="15" readonly>
-                            </td>
-
-                            <%-- Get the CURRENT --%>
-                            <td align="middle">
-                                <input value="<%= rs2.getString("CURRENT") %>"
-                                    name="CURRENT" size="10" readonly>
-                            </td>
-
-                            <%-- Get the NEXT_QUARTER --%>
-                            <td align="middle">
-                                <input value="<%= rs2.getString("NEXT_QUARTER") %>"
-                                    name="NEXT_QUARTER" size="15" readonly>
                             </td>
     
                             <%-- Get the YEAR --%>

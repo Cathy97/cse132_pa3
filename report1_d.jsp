@@ -37,7 +37,7 @@
                     // Load Oracle Driver class file
                     Class.forName("org.postgresql.Driver");
                     String dbURL = "jdbc:postgresql:cse132b?user=postgres&password=970303";
-                    Connection conn = DriverManager.getConnection(dbURL);
+                    conn = DriverManager.getConnection(dbURL);
 
             %>
 
@@ -53,7 +53,7 @@
                         // Create the statement
                         //statement = conn.createStatement();
                         PreparedStatement pstmt3 = conn.prepareStatement(
-                            "SELECT C.NAME AS CATEGORY_NAME, MAX(C.MIN_UNITS) AS REQ_UNITS, SUM(NEST.UNITS) AS UNITS_DONE, CASE WHEN MAX(C.MIN_UNITS) - SUM(NEST.UNITS) <= 0 THEN 0 ELSE MAX(C.MIN_UNITS) - SUM(NEST.UNITS) END AS UNITS_NEEDED FROM DEPARTMENT D, CATEGORIES C         JOIN (SELECT T.SECTION_ID AS SECTION_ID, T.SSN AS STUDENT_SSN, T.GRADE AS GRADE, T.UNITS AS UNITS, S.COURSE_NUM AS COURSE_NUM FROM TAKEN T JOIN SECTION S ON (T.SECTION_ID = S.SECTION_ID) WHERE T.GRADE IN ('A+','A','A-','B+','B','B-','C+','C','C-','D') AND T.SSN = ?      UNION SELECT S.SECTION_ID AS SECTION_ID, ?, 'F', 0, S.COURSE_NUM FROM SECTION S) NEST ON (C.COURSE_NUM = NEST.COURSE_NUM) WHERE D.DEPT_NAME = C.DEPT_NAME AND D.DEPT_NAME = ? GROUP BY C.NAME");
+                            "SELECT C.NAME AS CATEGORY_NAME, MAX(C.MIN_UNITS) AS REQ_UNITS, SUM(NEST.UNITS) AS UNITS_DONE, CASE WHEN MAX(C.MIN_UNITS) - SUM(NEST.UNITS) <= 0 THEN 0 ELSE MAX(C.MIN_UNITS) - SUM(NEST.UNITS) END AS UNITS_NEEDED FROM DEPARTMENT D, CATEGORIES C   JOIN (SELECT T.SECTION_ID AS SECTION_ID, T.SSN AS STUDENT_SSN, T.GRADE AS GRADE, T.UNITS AS UNITS, S.COURSE_NUM AS COURSE_NUM FROM TAKEN T JOIN SECTION S ON (T.SECTION_ID = S.SECTION_ID) WHERE T.GRADE IN ('A+','A','A-','B+','B','B-','C+','C','C-','D') AND T.SSN = ?      UNION SELECT S.SECTION_ID AS SECTION_ID, ?, 'F', 0, S.COURSE_NUM FROM SECTION S) NEST ON (C.COURSE_NUM = NEST.COURSE_NUM) WHERE D.DEPT_NAME = C.DEPT_NAME AND D.DEPT_NAME = ? GROUP BY C.NAME");
                         pstmt3.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         pstmt3.setInt(2, Integer.parseInt(request.getParameter("SSN")));
                         pstmt3.setString(3, request.getParameter("DEGREE"));
