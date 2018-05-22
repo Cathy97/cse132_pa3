@@ -55,7 +55,7 @@
                         String year = tokens[2];
                         PreparedStatement pstmt = conn.prepareStatement(
                             "SELECT CL.TITLE AS TITLE, CL.COURSE_NUM AS COURSE_NUM, CL.QUARTER AS QUARTER, CL.YEAR AS YEAR FROM CLASS CL WHERE CL.TITLE = ?");
-                        pstmt.setString(1, TITLE);
+                        pstmt.setString(1, request.getParameter("TITLE"));
                         
                         rs = pstmt.executeQuery();
                         rsmd1 = rs.getMetaData();
@@ -64,8 +64,8 @@
                         
                         PreparedStatement pstmt2 = conn.prepareStatement(
                             "SELECT DISTINCT SEC.QUARTER AS QUARTER, SEC.YEAR AS YEAR, ST.SSN AS SSN, ST.FIRSTNAME AS FIRST_NAME, ST.MIDDLENAME AS MIDDLE_NAME, ST.LASTNAME AS LAST_NAME, ST.RESIDENCY AS RESIDENCY, ST.STU_STATUS AS STU_STATUS, ST.ENROLL AS ENROLL, T.GRADE_OPTION AS GRADE, T.UNITS AS UNITS FROM SECTION SEC, TAKES T, STUDENT ST WHERE SEC.TITLE = ? AND SEC.SECTION_ID = T.SECTION_ID AND T.SSN = ST.SSN    UNION SELECT DISTINCT SEC.QUARTER AS QUARTER, SEC.YEAR AS YEAR, ST.SSN AS SSN, ST.ID AS ID, ST.FIRSTNAME AS FIRST_NAME, ST.MIDDLENAME AS MIDDLE_NAME, ST.LASTNAME AS LAST_NAME, ST.RESIDENCY AS RESIDENCY, ST.STU_STATUS AS STU_STATUS, ST.ENROLL AS ENROLL, T.GRADE AS GRADE, T.UNITS AS UNITS FROM SECTION SEC, TAKEN T, STUDENT ST WHERE SEC.TITLE = ? AND SEC.SECTION_ID = T.SECTION_ID AND T.SSN = ST.SSN");
-                        pstmt2.setString(1, TITLE);
-                        pstmt2.setString(2, TITLE);
+                        pstmt2.setString(1, request.getParameter("TITLE"));
+                        pstmt2.setString(2, request.getParameter("TITLE"));
                         rs2 = pstmt2.executeQuery();
 
                         rsmd2 = rs2.getMetaData();
