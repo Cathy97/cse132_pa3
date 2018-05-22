@@ -28,7 +28,7 @@
                 try {
                     // Load Oracle Driver class file
                     Class.forName("org.postgresql.Driver");
-                    String dbURL = "jdbc:postgresql:cse132b?user=postgres&password=970303";
+                    String dbURL = "jdbc:postgresql:cse132b?user=postgres&password=admin";
                     conn = DriverManager.getConnection(dbURL);
 
 
