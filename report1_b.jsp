@@ -54,7 +54,7 @@
                         String quarter = tokens[1];
                         String year = tokens[2];
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "SELECT CL.TITLE AS TITLE, CL.COURSE_NUM AS COURSE_NUM, CL.QUARTER AS QUARTER, CL.YEAR AS YEAR FROM CLASS CL WHERE CL.TITLE = ?");
+                            "SELECT CL.TITLE AS TITLE, CL.COURSE_NUM AS COURSE_NUM, CL.QUARTER AS QUARTER, CL.YEAR AS YEAR FROM CLASS CL WHERE CL.COURSE_NUM = ? AND CL.QUARTER = ? AND CL.YEAR = ? ");
                         pstmt.setString(1, course_num);
                         pstmt.setString(2, quarter);
                         pstmt.setInt(3, Integer.parseInt(year));
@@ -64,9 +64,8 @@
 
                         
                         PreparedStatement pstmt2 = conn.prepareStatement(
-                            "SELECT DISTINCT SEC.QUARTER AS QUARTER, SEC.YEAR AS YEAR, ST.SSN AS SSN, ST.FIRSTNAME AS FIRST_NAME, ST.MIDDLENAME AS MIDDLE_NAME, ST.LASTNAME AS LAST_NAME, ST.RESIDENCY AS RESIDENCY, ST.STU_STATUS AS STU_STATUS, ST.ENROLL AS ENROLL, T.GRADE_OPTION AS GRADE, T.UNITS AS UNITS FROM SECTION SEC, TAKES T, STUDENT ST WHERE SEC.TITLE = ? AND SEC.SECTION_ID = T.SECTION_ID AND T.SSN = ST.SSN    UNION SELECT DISTINCT SEC.QUARTER AS QUARTER, SEC.YEAR AS YEAR, ST.SSN AS SSN, ST.ID AS ID, ST.FIRSTNAME AS FIRST_NAME, ST.MIDDLENAME AS MIDDLE_NAME, ST.LASTNAME AS LAST_NAME, ST.RESIDENCY AS RESIDENCY, ST.STU_STATUS AS STU_STATUS, ST.ENROLL AS ENROLL, T.GRADE AS GRADE, T.UNITS AS UNITS FROM SECTION SEC, TAKEN T, STUDENT ST WHERE SEC.TITLE = ? AND SEC.SECTION_ID = T.SECTION_ID AND T.SSN = ST.SSN");
-                        pstmt2.setString(1, request.getParameter("course_num"));
-                        pstmt2.setString(2, request.getParameter("course_num"));
+                            "SELECT DISTINCT SEC.QUARTER AS QUARTER, SEC.YEAR AS YEAR, ST.SSN AS SSN, ST.FIRSTNAME AS FIRST_NAME, ST.MIDDLENAME AS MIDDLE_NAME, ST.LASTNAME AS LAST_NAME, ST.RESIDENCY AS RESIDENCY, ST.STU_STATUS AS STU_STATUS, ST.ENROLL AS ENROLL, T.GRADE_OPT AS GRADE, T.UNITS AS UNITS FROM CLASS CL, SECTION SEC, TAKES T, STUDENT ST WHERE CL.COURSE_NUM = SEC.COURSE_NUM AND CL.QUARTER = SEC.QUARTER AND CL.YEAR = SEC.YEAR AND SEC.COURSE_NUM = ? AND SEC.SECTION_ID = T.SECTION_ID AND T.SSN = ST.SSN ");
+                        pstmt2.setString(1, request.getParameter("COURSE_NUM"));
                         rs2 = pstmt2.executeQuery();
 
                         rsmd2 = rs2.getMetaData();
@@ -82,7 +81,7 @@
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                 statement2 = conn.createStatement();
-                classes = statement2.executeQuery("SELECT CL.QUARTER AS QUARTER, CL.YEAR AS YEAR, CL.COURSE_NUM AS COURSE_NUM, CL.TITLE AS TITLE FROM CLASS CL");
+                classes = statement2.executeQuery("SELECT DISTINCT CL.QUARTER AS QUARTER, CL.YEAR AS YEAR, CL.COURSE_NUM AS COURSE_NUM, CL.TITLE AS TITLE FROM CLASS CL");
 
             %>
 
@@ -101,7 +100,7 @@
                                 <% 
                                     while ( classes.next() ){
                                 %>
-                                     <option value="<%= classes.getString("COURSE_NUM") %>,<%= classes.getString("QUARTER") %>,<%= classes.getString("YEAR") %>"><%= classes.getString("COURSE_NUM") %> | <%= classes.getString("TITLE") %> | <%= classes.getString("QUARTER") %> - <%= classes.getString("YEAR") %></option>
+                                     <option value="<%= classes.getString("COURSE_NUM") %>,<%= classes.getString("QUARTER") %>,<%= classes.getInt("YEAR") %>"><%= classes.getString("TITLE") %> | <%= classes.getString("COURSE_NUM") %> |  <%= classes.getString("QUARTER") %> - <%= classes.getInt("YEAR") %></option>
                                 <%
                                     }
                                 %>
@@ -169,12 +168,12 @@
                     }
                 if(columnCount != 0){
             %>
-                <table border="0"><th><font face = "Arial Black" size = "6">Students Enrolled in Class Info</font></th></table>
+                <table border="0"><th><font face = "Arial Black" size = "6">Students Enrolled Class Info</font></th></table>
                 <table border="1">
                     <tr>
             <%
-                    int k=1;
-                    for (k = 1; k <= columnCount; k++ ) {
+                    
+                    for (int k = 1; k <= columnCount; k++ ) {
                         String name2 = rsmd2.getColumnName(k);
             %>
                         <th><%= name2 %></th>
@@ -183,12 +182,12 @@
             %>
                     </tr>
             <%
-                    
-                    while ( rs2.next() ) {      
+       
+                     while ( rs2.next() ) {      
             %>
                     <tr>
             <%
-                            for(k=1; k<= columnCount; k++){
+                            for(int k=1; k<= columnCount; k++){
                                 String name3 = rsmd2.getColumnName(k);
             %>
                                 <td align="middle"> <input value="<%= rs2.getString(name3) %>" 

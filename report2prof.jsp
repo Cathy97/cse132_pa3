@@ -167,7 +167,7 @@
 								if(dateQuery_rs.next())
 									s_date = dateQuery_rs.getString("DATE");
 								
-								PreparedStatement conflict = conn.prepareStatement("SELECT DISTINCT REVIEWTIME.DATE, REVIEWTIME.RESERVE_TIME FROM REVIEWTIME WHERE NOT EXISTS (SELECT 1 FROM NOTPOSSIBLE_TEMP WHERE REVIEWTIME.DATE = NOTPOSSIBLE_TEMP.DATE AND REVIEWTIME.RESERVE_TIME = NOTPOSSIBLE_TEMP.TIME) AND REVIEWTIME.DATE = ?");
+								PreparedStatement conflict = conn.prepareStatement("SELECT DISTINCT REVIEWTIME.DATE, REVIEWTIME.RESERVE_TIME FROM REVIEWTIME WHERE NOT EXISTS (SELECT * FROM NOTPOSSIBLE_TEMP WHERE REVIEWTIME.DATE = NOTPOSSIBLE_TEMP.DATE AND REVIEWTIME.RESERVE_TIME = NOTPOSSIBLE_TEMP.TIME) AND REVIEWTIME.DATE = ?");
 								conflict.setString(1, s_date);
 								ResultSet conflict_rs = conflict.executeQuery();
 								%>
@@ -209,7 +209,7 @@
 								stDay++;
 							}
 						}
-						else if(stMonth.equals("January") && edMonth.equals("February")){	
+						else if(stMonth.equals("April") && edMonth.equals("May")){	
 							while(stDay <= 31){								
 								PreparedStatement dateQuery = conn.prepareStatement("SELECT DATE FROM CALENDAR WHERE MONTH = ? AND DAY = ?");
 								dateQuery.setString(1, stMonth);
@@ -315,7 +315,7 @@
 								secondMonth++;
 							}
 						}
-						else if(stMonth.equals("February") && edMonth.equals("March")){	
+						else if(stMonth.equals("May") && edMonth.equals("June")){	
 							while(stDay <= 29){								
 								PreparedStatement dateQuery = conn.prepareStatement("SELECT DATE FROM CALENDAR WHERE MONTH = ? AND DAY = ?");
 								dateQuery.setString(1, stMonth);
@@ -421,7 +421,7 @@
 								secondMonth++;
 							}
 						}
-						else if(stMonth.equals("January") && edMonth.equals("March")){	
+						else if(stMonth.equals("April") && edMonth.equals("June")){	
 							while(stDay <= 31){								
 								PreparedStatement dateQuery = conn.prepareStatement("SELECT DATE FROM CALENDAR WHERE MONTH = ? AND DAY = ?");
 								dateQuery.setString(1, stMonth);
@@ -595,7 +595,7 @@
                     // Create the statement
                     Statement statement = conn.createStatement();
 
-                    ResultSet rs = statement.executeQuery("SELECT DISTINCT CLASS.COURSE_NUM, SECTION.SECTION_ID FROM CLASS INNER JOIN SECTION ON CLASS.COURSE_NUM = SECTION.COURSE_NUM AND SECTION.YEAR = 2018 AND SECTION.QUARTER = 'Spring'");
+                    ResultSet rs = statement.executeQuery("SELECT DISTINCT CLASS.COURSE_NUM, SECTION.SECTION_ID FROM CLASS INNER JOIN SECTION ON CLASS.COURSE_NUM = SECTION.COURSE_NUM AND SECTION.YEAR = 2018 AND SECTION.QUARTER = 'sp2018'");
             %>
 
             <!-- Add an HTML table header row to format the results -->

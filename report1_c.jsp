@@ -51,7 +51,7 @@
                         // Create the statement
                         //statement = conn.createStatement();
                         PreparedStatement pstmt3 = conn.prepareStatement(
-                            "SELECT S.SSN AS SSN, S.FIRSTNAME AS FIRSTNAME, S.MIDDLENAME AS MIDDLENAME, S.LASTNAME AS LASTNAME FROM STUDENT S WHERE S.SSN = ?");
+                            "SELECT DISTINCT S.SSN AS SSN, S.FIRSTNAME AS FIRSTNAME, S.MIDDLENAME AS MIDDLENAME, S.LASTNAME AS LASTNAME FROM STUDENT S WHERE S.SSN = ?");
                         pstmt3.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs3 = pstmt3.executeQuery();
                         rsmd3 = rs3.getMetaData();
@@ -60,21 +60,21 @@
                         // Use the created statement to SELECT
                         // the student attributes FROM the Student table.
                         PreparedStatement pstmt = conn.prepareStatement(
-                            "SELECT S.QUARTER AS QUARTER, S.YEAR AS YEAR, CL.COURSE_NUM AS COURSE_NUM, CL.TITLE AS TITLE, T.GRADE AS GRADE, T.UNITS AS UNITS FROM SECTION S, TAKEN T, STUDENT ST, CLASS CL WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.SECTION_ID = S.SECTION_ID AND CL.COURSE_NUM = S.COURSE_NUM ORDER BY S.QUARTER, S.YEAR");
+                            "SELECT DISTINCT CL.QUARTER AS QUARTER, CL.YEAR AS YEAR, CL.COURSE_NUM AS COURSE_NUM, CL.TITLE AS TITLE, T.GRADE AS GRADE, T.UNITS AS UNITS FROM TAKEN T, STUDENT ST, CLASS CL WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.QUARTER = CL.QUARTER AND T.COURSE_NUM = CL.COURSE_NUM ORDER BY CL.QUARTER, CL.YEAR");
                         pstmt.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs = pstmt.executeQuery();
                         rsmd1 = rs.getMetaData();
                         columnCount1 = rsmd1.getColumnCount();
 
                         PreparedStatement pstmt2 = conn.prepareStatement(
-                            "SELECT S.QUARTER AS QUARTER, S.YEAR AS YEAR, SUM(GC.NUMBER_GRADE)/COUNT(*) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC, SECTION S WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE AND T.SECTION_ID = S.SECTION_ID GROUP BY S.QUARTER, S.YEAR");
+                            "SELECT DISTINCT CL.QUARTER AS QUARTER, CL.YEAR AS YEAR, SUM(GC.NUMBER_GRADE)/COUNT(*) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC, CLASS CL WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE AND T.QUARTER = CL.QUARTER AND T.COURSE_NUM = CL.COURSE_NUM GROUP BY CL.QUARTER, CL.YEAR");
                         pstmt2.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs2 = pstmt2.executeQuery();
                         rsmd2 = rs2.getMetaData();
                         columnCount = rsmd2.getColumnCount();
 
                         PreparedStatement pstmt4 = conn.prepareStatement(
-                            "SELECT SUM(GC.NUMBER_GRADE)/COUNT(*) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE GROUP BY T.SSN");
+                            "SELECT DISTINCT SUM(GC.NUMBER_GRADE)/COUNT(*) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE GROUP BY T.SSN");
                         pstmt4.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs4 = pstmt4.executeQuery();
                         rsmd4 = rs4.getMetaData();
@@ -90,7 +90,7 @@
             <%-- -------- SELECT Statement Code -------- --%>
             <%
                 statement2 = conn.createStatement();
-                student = statement2.executeQuery("SELECT S.SSN AS SSN, S.FIRSTNAME AS FIRSTNAME, S.MIDDLENAME AS MIDDLENAME, S.LASTNAME AS LASTNAME FROM STUDENT S");
+                student = statement2.executeQuery("SELECT DISTINCT S.SSN AS SSN, S.FIRSTNAME AS FIRSTNAME, S.MIDDLENAME AS MIDDLENAME, S.LASTNAME AS LASTNAME FROM STUDENT S");
 
             %>
 

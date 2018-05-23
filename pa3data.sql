@@ -149,6 +149,19 @@ insert into meeting values(8, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 3, 4, 'PM', 0
 insert into meeting values(9, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 5, 6, 'PM', 00, 00, 'PM');
 insert into meeting values(10, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 5, 6, 'PM', 00, 00, 'PM');
 insert into meeting values(10, 'DIS', NULL, NULL, 'W', NULL, NULL, 7, 8, 'PM', 00, 00, 'PM');
+-- 24h
+insert into meeting values(1, 'LEC', 'M', NULL, 'W', NULL, 'F', 10, 11, 'AM', 00, 00, 'AM');
+insert into meeting values(2, 'LEC', 'M', NULL, 'W', NULL, 'F', 10, 11, 'AM', 00, 00, 'AM');
+insert into meeting values(3, 'LEC', 'M', NULL, 'W', NULL, 'F', 12, 13, 'PM', 00, 00, 'PM');
+insert into meeting values(4, 'LEC', 'M', NULL, 'W', NULL, 'F', 12, 13, 'PM', 00, 00, 'PM');
+insert into meeting values(5, 'LEC', 'M', NULL, 'W', NULL, 'F', 12, 13, 'PM', 00, 00, 'PM');
+insert into meeting values(6, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 14, 15, 'PM', 00, 00, 'PM');
+insert into meeting values(6, 'DIS', NULL, NULL, NULL, NULL, 'F', 18, 19, 'PM', 00, 00, 'PM');
+insert into meeting values(7, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 15, 16, 'PM', 00, 00, 'PM');
+insert into meeting values(8, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 15, 16, 'PM', 00, 00, 'PM');
+insert into meeting values(9, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 17, 18, 'PM', 00, 00, 'PM');
+insert into meeting values(10, 'LEC', NULL, 'Tu', NULL, 'Th', NULL, 17, 18, 'PM', 00, 00, 'PM');
+insert into meeting values(10, 'DIS', NULL, NULL, 'W', NULL, NULL, 19, 20, 'PM', 00, 00, 'PM');
 
 -- takes
 insert into takes values( 16, 2, 'letter', 4, 'LEC');
@@ -181,29 +194,79 @@ insert into takes values( 15, 7, 'letter', 4, 'LEC');
 
 
 -- categories
-insert into categories values('TOTAL_UNIT', 'B.S. in Computer Science', NULL, 40);
-insert into categories values('MAJ_UNIT_LOWDIV', 'B.S. in Computer Science', NULL, 10);
-insert into categories values('MAJ_UNIT_UPDIV', 'B.S. in Computer Science', NULL, 15);
-insert into categories values('ELECTIVE', 'B.S. in Computer Science', NULL, 15);
-insert into categories values('GRAD_UNIT', 'B.S. in Computer Science', NULL, 0);
+insert into categories values('TOTAL_UNIT', 'CSE8A', 'B.S. in Computer Science', NULL, 40);
+insert into categories values('MAJ_UNIT_LOWDIV','CSE8A', 'B.S. in Computer Science', NULL, 10);
+insert into categories values('GRAD_UNIT', 'CSE8A','B.S. in Computer Science', NULL, 0);
 
-insert into categories values('TOTAL_UNIT', 'B.A. in Philosophy', NULL, 35);
-insert into categories values('MAJ_UNIT_LOWDIV', 'B.A. in Philosophy', NULL, 15);
-insert into categories values('MAJ_UNIT_UPDIV', 'B.A. in Philosophy', NULL, 20);
-insert into categories values('ELECTIVE', 'B.A. in Philosophy', NULL, 0);
-insert into categories values('GRAD_UNIT', 'B.A. in Philosophy', NULL, 0);
+insert into categories values('TOTAL_UNIT', 'CSE105', 'B.S. in Computer Science', NULL, 40);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE105', 'B.S. in Computer Science', NULL, 15);
+insert into categories values('ELECTIVE', 'CSE105', 'B.S. in Computer Science', NULL, 15);
+insert into categories values('GRAD_UNIT', 'CSE105', 'B.S. in Computer Science', NULL, 0);
 
-insert into categories values('TOTAL_UNIT', 'B.S. in Mechanical Engineering', NULL, 50);
-insert into categories values('MAJ_UNIT_LOWDIV', 'B.S. in Mechanical Engineering', NULL, 20);
-insert into categories values('MAJ_UNIT_UPDIV', 'B.S. in Mechanical Engineering', NULL, 20);
-insert into categories values('ELECTIVE', 'B.S. in Mechanical Engineering', NULL, 10);
-insert into categories values('GRAD_UNIT', 'B.S. in Mechanical Engineering', NULL, 0);
+insert into categories values('TOTAL_UNIT', 'CSE123', 'B.S. in Computer Science', NULL, 40);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE123','B.S. in Computer Science', NULL, 15);
+insert into categories values('GRAD_UNIT', 'CSE123', 'B.S. in Computer Science', NULL, 0);
 
-insert into categories values('TOTAL_UNIT', 'M.S. in Computer Science', NULL, 45);
-insert into categories values('MAJ_UNIT_LOWDIV', 'M.S. in Computer Science', NULL, 0);
-insert into categories values('MAJ_UNIT_UPDIV', 'M.S. in Computer Science', NULL, 0);
-insert into categories values('ELECTIVE', 'M.S. in Computer Science', NULL, 0);
-insert into categories values('GRAD_UNIT', 'M.S. in Computer Science', NULL, 45);
+
+insert into categories values('TOTAL_UNIT', 'MAE3', 'B.S. in Mechanical Engineering', NULL, 35);
+insert into categories values('MAJ_UNIT_LOWDIV', 'MAE3', 'B.S. in Mechanical Engineering', NULL, 15);
+insert into categories values('ELECTIVE', 'MAE3', 'B.S. in Mechanical Engineering', NULL, 0);
+insert into categories values('GRAD_UNIT', 'MAE3', 'B.S. in Mechanical Engineering', NULL, 0);
+
+insert into categories values('TOTAL_UNIT', 'MAE107', 'B.S. in Mechanical Engineering', NULL, 35);
+insert into categories values('MAJ_UNIT_UPDIV', 'MAE107', 'B.S. in Mechanical Engineering', NULL, 20);
+insert into categories values('ELECTIVE', 'MAE107', 'B.S. in Mechanical Engineering', NULL, 0);
+insert into categories values('GRAD_UNIT', 'MAE107', 'B.S. in Mechanical Engineering', NULL, 0);
+
+
+insert into categories values('TOTAL_UNIT', 'MAE108', 'B.S. in Mechanical Engineering', NULL, 35);
+insert into categories values('MAJ_UNIT_UPDIV', 'MAE108', 'B.S. in Mechanical Engineering', NULL, 20);
+insert into categories values('GRAD_UNIT', 'MAE108', 'B.S. in Mechanical Engineering', NULL, 0);
+
+
+insert into categories values('TOTAL_UNIT', 'PHIL10', 'B.A. in Philosophy', NULL, 50);
+insert into categories values('MAJ_UNIT_LOWDIV', 'PHIL10', 'B.A. in Philosophy', NULL, 20);
+insert into categories values('GRAD_UNIT', 'PHIL10', 'B.A. in Philosophy', NULL, 0);
+
+insert into categories values('TOTAL_UNIT', 'PHIL12', 'B.A. in Philosophy', NULL, 50);
+insert into categories values('MAJ_UNIT_LOWDIV', 'PHIL12', 'B.A. in Philosophy', NULL, 20);
+insert into categories values('GRAD_UNIT', 'PHIL12', 'B.A. in Philosophy', NULL, 0);
+
+insert into categories values('TOTAL_UNIT', 'PHIL165', 'B.A. in Philosophy', NULL, 50);
+insert into categories values('MAJ_UNIT_UPDIV', 'PHIL165', 'B.A. in Philosophy', NULL, 20);
+insert into categories values('GRAD_UNIT', 'PHIL165', 'B.A. in Philosophy', NULL, 0);
+
+insert into categories values('TOTAL_UNIT', 'PHIL167', 'B.A. in Philosophy', NULL, 50);
+insert into categories values('MAJ_UNIT_UPDIV', 'PHIL167', 'B.A. in Philosophy', NULL, 20);
+insert into categories values('GRAD_UNIT', 'PHIL167', 'B.A. in Philosophy', NULL, 0);
+
+insert into categories values('TOTAL_UNIT', 'CSE250A', 'M.S. in Computer Science', NULL, 45);
+insert into categories values('MAJ_UNIT_LOWDIV', 'CSE250A', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE250A', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('ELECTIVE', 'CSE250A', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('GRAD_UNIT', 'CSE250A', 'M.S. in Computer Science', NULL, 45);
+
+insert into categories values('TOTAL_UNIT', 'CSE250B', 'M.S. in Computer Science', NULL, 45);
+insert into categories values('MAJ_UNIT_LOWDIV', 'CSE250B', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE250B', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('GRAD_UNIT', 'CSE250B', 'M.S. in Computer Science', NULL, 45);
+
+insert into categories values('TOTAL_UNIT', 'CSE255', 'M.S. in Computer Science', NULL, 45);
+insert into categories values('MAJ_UNIT_LOWDIV', 'CSE255', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE255', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('GRAD_UNIT', 'CSE255', 'M.S. in Computer Science', NULL, 45);
+
+insert into categories values('TOTAL_UNIT', 'CSE232A', 'M.S. in Computer Science', NULL, 45);
+insert into categories values('MAJ_UNIT_LOWDIV', 'CSE232A', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE232A', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('GRAD_UNIT', 'CSE232A', 'M.S. in Computer Science', NULL, 45);
+
+
+insert into categories values('TOTAL_UNIT', 'CSE221', 'M.S. in Computer Science', NULL, 45);
+insert into categories values('MAJ_UNIT_LOWDIV', 'CSE221', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('MAJ_UNIT_UPDIV', 'CSE221', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('ELECTIVE', 'CSE221', 'M.S. in Computer Science', NULL, 0);
+insert into categories values('GRAD_UNIT', 'CSE221', 'M.S. in Computer Science', NULL, 45);
 
 -- concentration
 insert into concentration values('Databases', 'M.S. in Computer Science', 'CSE232A', 3, 4);
@@ -219,38 +282,38 @@ insert into elective values('MAE107');
 insert into elective values('MAE3');
 
 -- taken
-insert into taken values( 1, 'CSE8A', 'wi2017', 'letter', 4, 'A-', 'Justin Bieber');
-insert into taken values( 3, 'CSE8A', 'wi2017', 'letter', 4, 'B+', 'Justin Bieber');
-insert into taken values( 2, 'CSE8A', 'fa2017', 'letter', 4, 'C-', 'Selena Gomez');
-insert into taken values( 4, 'CSE8A', 'wi2018', 'letter', 4, 'A-', 'Kelly Clarkson');
-insert into taken values( 5, 'CSE8A', 'wi2018', 'letter', 4, 'B', 'Kelly Clarkson');
-insert into taken values( 1, 'CSE105', 'sp2017', 'letter', 4, 'A-', 'Taylor Swift');
-insert into taken values( 5, 'CSE105', 'sp2017', 'letter', 4, 'B+', 'Taylor Swift');
-insert into taken values( 4, 'CSE105', 'sp2017', 'letter', 4, 'C', 'Taylor Swift');
-insert into taken values( 16, 'CSE250A', 'wi2017', 'letter', 4, 'C', 'Bjork');
-insert into taken values( 22, 'CSE250A', 'wi2018', 'letter', 4, 'B+', 'Bjork');
-insert into taken values( 18, 'CSE250A', 'wi2018', 'letter', 4, 'D', 'Bjork');
-insert into taken values( 19, 'CSE250A', 'wi2018', 'letter', 4, 'F', 'Bjork');
-insert into taken values( 17, 'CSE250B', 'sp2017', 'letter', 4, 'A', 'Justin Bieber');
-insert into taken values( 19, 'CSE250B', 'sp2017', 'letter', 4, 'A', 'Justin Bieber');
-insert into taken values( 20, 'CSE255', 'wi2018', 'letter', 4, 'B-', 'Justin Bieber');
-insert into taken values( 18, 'CSE255', 'wi2018', 'letter', 4, 'B', 'Justin Bieber');
-insert into taken values( 21, 'CSE255', 'wi2018', 'letter', 4, 'F', 'Justin Bieber');
-insert into taken values( 17, 'CSE232A', 'wi2018', 'letter', 4, 'A-', 'Kelly Clarkson');
-insert into taken values( 22, 'CSE221', 'fa2017', 'letter', 4, 'A', 'Kelly Clarkson');
-insert into taken values( 20, 'CSE221', 'fa2017', 'letter', 4, 'A', 'Kelly Clarkson');
-insert into taken values( 10, 'MAE107', 'fa2017', 'letter', 4, 'B+', 'Bjork');
-insert into taken values( 8, 'MAE108', 'wi2017', 'letter', 2, 'B-', 'Selena Gomez');
-insert into taken values( 7, 'MAE108', 'wi2017', 'letter', 2, 'A-', 'Selena Gomez');
-insert into taken values( 6, 'MAE108', 'sp2017', 'letter', 2, 'B', 'Selena Gomez');
-insert into taken values( 10, 'MAE108', 'sp2017', 'letter', 2, 'B+', 'Selena Gomez');
-insert into taken values( 11, 'PHIL10', 'wi2018', 'letter', 4, 'A', 'Bjork');
-insert into taken values( 12, 'PHIL10', 'wi2018', 'letter', 4, 'A', 'Bjork');
-insert into taken values( 13, 'PHIL10', 'wi2018', 'letter', 4, 'C-', 'Bjork');
-insert into taken values( 14, 'PHIL10', 'wi2018', 'letter', 4, 'C+', 'Bjork');
-insert into taken values( 15, 'PHIL165', 'fa2017', 'letter', 2, 'F', 'Flo Rida');
-insert into taken values( 12, 'PHIL165', 'fa2017', 'letter', 2, 'D', 'Flo Rida');
-insert into taken values( 11, 'PHIL165', 'wi2018', 'letter', 2, 'A-', 'Adam Levine');
+insert into taken values( 1, 'CSE8A', 'wi2017', 2017, 'letter', 4, 'A-', 'Justin Bieber');
+insert into taken values( 3, 'CSE8A', 'wi2017', 2017,'letter', 4, 'B+', 'Justin Bieber');
+insert into taken values( 2, 'CSE8A', 'fa2017', 2017,'letter', 4, 'C-', 'Selena Gomez');
+insert into taken values( 4, 'CSE8A', 'wi2018', 2018,'letter', 4, 'A-', 'Kelly Clarkson');
+insert into taken values( 5, 'CSE8A', 'wi2018', 2018,'letter', 4, 'B', 'Kelly Clarkson');
+insert into taken values( 1, 'CSE105', 'sp2017', 2017,'letter', 4, 'A-', 'Taylor Swift');
+insert into taken values( 5, 'CSE105', 'sp2017', 2017,'letter', 4, 'B+', 'Taylor Swift');
+insert into taken values( 4, 'CSE105', 'sp2017', 2017,'letter', 4, 'C', 'Taylor Swift');
+insert into taken values( 16, 'CSE250A', 'wi2017', 2017,'letter', 4, 'C', 'Bjork');
+insert into taken values( 22, 'CSE250A', 'wi2018', 2018,'letter', 4, 'B+', 'Bjork');
+insert into taken values( 18, 'CSE250A', 'wi2018', 2018,'letter', 4, 'D', 'Bjork');
+insert into taken values( 19, 'CSE250A', 'wi2018', 2018,'letter', 4, 'F', 'Bjork');
+insert into taken values( 17, 'CSE250B', 'sp2017', 2017,'letter', 4, 'A', 'Justin Bieber');
+insert into taken values( 19, 'CSE250B', 'sp2017', 2017,'letter', 4, 'A', 'Justin Bieber');
+insert into taken values( 20, 'CSE255', 'wi2018', 2018,'letter', 4, 'B-', 'Justin Bieber');
+insert into taken values( 18, 'CSE255', 'wi2018', 2018,'letter', 4, 'B', 'Justin Bieber');
+insert into taken values( 21, 'CSE255', 'wi2018', 2018,'letter', 4, 'F', 'Justin Bieber');
+insert into taken values( 17, 'CSE232A', 'wi2018', 2018,'letter', 4, 'A-', 'Kelly Clarkson');
+insert into taken values( 22, 'CSE221', 'fa2017', 2017,'letter', 4, 'A', 'Kelly Clarkson');
+insert into taken values( 20, 'CSE221', 'fa2017', 2017,'letter', 4, 'A', 'Kelly Clarkson');
+insert into taken values( 10, 'MAE107', 'fa2017', 2017,'letter', 4, 'B+', 'Bjork');
+insert into taken values( 8, 'MAE108', 'wi2017', 2017,'letter', 2, 'B-', 'Selena Gomez');
+insert into taken values( 7, 'MAE108', 'wi2017', 2017,'letter', 2, 'A-', 'Selena Gomez');
+insert into taken values( 6, 'MAE108', 'sp2017', 2017,'letter', 2, 'B', 'Selena Gomez');
+insert into taken values( 10, 'MAE108', 'sp2017', 2017,'letter', 2, 'B+', 'Selena Gomez');
+insert into taken values( 11, 'PHIL10', 'wi2018', 2018,'letter', 4, 'A', 'Bjork');
+insert into taken values( 12, 'PHIL10', 'wi2018', 2018,'letter', 4, 'A', 'Bjork');
+insert into taken values( 13, 'PHIL10', 'wi2018', 2018,'letter', 4, 'C-', 'Bjork');
+insert into taken values( 14, 'PHIL10', 'wi2018', 2018,'letter', 4, 'C+', 'Bjork');
+insert into taken values( 15, 'PHIL165', 'fa2017', 2017,'letter', 2, 'F', 'Flo Rida');
+insert into taken values( 12, 'PHIL165', 'fa2017', 2017,'letter', 2, 'D', 'Flo Rida');
+insert into taken values( 11, 'PHIL165', 'wi2018', 2018,'letter', 2, 'A-', 'Adam Levine');
 
 
 -- grade_conversion
@@ -265,3 +328,243 @@ insert into grade_conversion values('C', 2.0);
 insert into grade_conversion values('C-', 1.7);
 insert into grade_conversion values('D', 1.0);
 insert into grade_conversion values('F', 0.0);
+
+
+-- calendar
+insert into calendar values('Mon', 'April', 2);
+insert into calendar values('Mon', 'April', 9);
+insert into calendar values('Mon', 'April', 16);
+insert into calendar values('Mon', 'April', 23);
+insert into calendar values('Mon', 'April', 30);
+insert into calendar values('Tu', 'April', 3);
+insert into calendar values('Tu', 'April', 10);
+insert into calendar values('Tu', 'April', 17);
+insert into calendar values('Tu', 'April', 24);
+insert into calendar values('W', 'April', 4);
+insert into calendar values('W', 'April', 11);
+insert into calendar values('W', 'April', 18);
+insert into calendar values('W', 'April', 26);
+insert into calendar values('Th', 'April', 5);
+insert into calendar values('Th', 'April', 12);
+insert into calendar values('Th', 'April', 19);
+insert into calendar values('Th', 'April', 26);
+insert into calendar values('F', 'April', 6);
+insert into calendar values('F', 'April', 13);
+insert into calendar values('F', 'April', 20);
+insert into calendar values('F', 'April', 27);
+insert into calendar values('Mon', 'May', 7);
+insert into calendar values('Mon', 'May', 14);
+insert into calendar values('Mon', 'May', 21);
+insert into calendar values('Mon', 'May', 28);
+insert into calendar values('Tu', 'May', 1);
+insert into calendar values('Tu', 'May', 8);
+insert into calendar values('Tu', 'May', 15);
+insert into calendar values('Tu', 'May', 22);
+insert into calendar values('Tu', 'May', 29);
+insert into calendar values('W', 'May', 2);
+insert into calendar values('W', 'May', 9);
+insert into calendar values('W', 'May', 16);
+insert into calendar values('W', 'May', 23);
+insert into calendar values('W', 'May', 30);
+insert into calendar values('Th', 'May', 3);
+insert into calendar values('Th', 'May', 10);
+insert into calendar values('Th', 'May', 17);
+insert into calendar values('Th', 'May', 24);
+insert into calendar values('Th', 'May', 31);
+insert into calendar values('F', 'May', 4);
+insert into calendar values('F', 'May', 11);
+insert into calendar values('F', 'May', 18);
+insert into calendar values('F', 'May', 25);
+insert into calendar values('M', 'June', 4);
+insert into calendar values('M', 'JUNE', 11);
+insert into calendar values('M', 'JUNE', 18);
+insert into calendar values('M', 'JUNE', 25);
+insert into calendar values('Tu', 'JUNE', 5);
+insert into calendar values('Tu', 'JUNE', 12);
+insert into calendar values('Tu', 'JUNE', 19);
+insert into calendar values('Tu', 'JUNE', 26);
+insert into calendar values('W', 'JUNE', 6);
+insert into calendar values('W', 'JUNE', 13);
+insert into calendar values('W', 'JUNE', 20);
+insert into calendar values('W', 'JUNE', 27);
+insert into calendar values('Th', 'JUNE', 7);
+insert into calendar values('Th', 'JUNE', 14);
+insert into calendar values('Th', 'JUNE', 21);
+insert into calendar values('Th', 'JUNE', 28);
+insert into calendar values('F', 'JUNE', 1);
+insert into calendar values('F', 'JUNE', 8);
+insert into calendar values('F', 'JUNE', 15);
+insert into calendar values('F', 'JUNE', 22);
+insert into calendar values('F', 'JUNE', 29);
+
+
+
+-- reviewtime
+insert into reviewtime values('Mon', 0);
+insert into reviewtime values('Mon', 1);
+insert into reviewtime values('Mon', 2);
+insert into reviewtime values('Mon', 3);
+insert into reviewtime values('Mon', 4);
+insert into reviewtime values('Mon', 5);
+insert into reviewtime values('Mon', 6);
+insert into reviewtime values('Mon', 7);
+insert into reviewtime values('Mon', 8);
+insert into reviewtime values('Mon', 9);
+insert into reviewtime values('Mon', 10);
+insert into reviewtime values('Mon', 11);
+insert into reviewtime values('Mon', 12);
+insert into reviewtime values('Mon', 13);
+insert into reviewtime values('Mon', 14);
+insert into reviewtime values('Mon', 15);
+insert into reviewtime values('Mon', 16);
+insert into reviewtime values('Mon', 17);
+insert into reviewtime values('Mon', 18);
+insert into reviewtime values('Mon', 19);
+insert into reviewtime values('Mon', 20);
+insert into reviewtime values('Mon', 21);
+insert into reviewtime values('Mon', 22);
+insert into reviewtime values('Mon', 23);
+
+insert into reviewtime values('Tu', 0);
+insert into reviewtime values('Tu', 1);
+insert into reviewtime values('Tu', 2);
+insert into reviewtime values('Tu', 3);
+insert into reviewtime values('Tu', 4);
+insert into reviewtime values('Tu', 5);
+insert into reviewtime values('Tu', 6);
+insert into reviewtime values('Tu', 7);
+insert into reviewtime values('Tu', 8);
+insert into reviewtime values('Tu', 9);
+insert into reviewtime values('Tu', 10);
+insert into reviewtime values('Tu', 11);
+insert into reviewtime values('Tu', 12);
+insert into reviewtime values('Tu', 13);
+insert into reviewtime values('Tu', 14);
+insert into reviewtime values('Tu', 15);
+insert into reviewtime values('Tu', 16);
+insert into reviewtime values('Tu', 17);
+insert into reviewtime values('Tu', 18);
+insert into reviewtime values('Tu', 19);
+insert into reviewtime values('Tu', 20);
+insert into reviewtime values('Tu', 21);
+insert into reviewtime values('Tu', 22);
+insert into reviewtime values('Tu', 23);
+
+
+insert into reviewtime values('W', 0);
+insert into reviewtime values('W', 1);
+insert into reviewtime values('W', 2);
+insert into reviewtime values('W', 3);
+insert into reviewtime values('W', 4);
+insert into reviewtime values('W', 5);
+insert into reviewtime values('W', 6);
+insert into reviewtime values('W', 7);
+insert into reviewtime values('W', 8);
+insert into reviewtime values('W', 9);
+insert into reviewtime values('W', 10);
+insert into reviewtime values('W', 11);
+insert into reviewtime values('W', 12);
+insert into reviewtime values('W', 13);
+insert into reviewtime values('W', 14);
+insert into reviewtime values('W', 15);
+insert into reviewtime values('W', 16);
+insert into reviewtime values('W', 17);
+insert into reviewtime values('W', 18);
+insert into reviewtime values('W', 19);
+insert into reviewtime values('W', 20);
+insert into reviewtime values('W', 21);
+insert into reviewtime values('W', 22);
+insert into reviewtime values('W', 23);
+
+insert into reviewtime values('Th', 0);
+insert into reviewtime values('Th', 1);
+insert into reviewtime values('Th', 2);
+insert into reviewtime values('Th', 3);
+insert into reviewtime values('Th', 4);
+insert into reviewtime values('Th', 5);
+insert into reviewtime values('Th', 6);
+insert into reviewtime values('Th', 7);
+insert into reviewtime values('Th', 8);
+insert into reviewtime values('Th', 9);
+insert into reviewtime values('Th', 10);
+insert into reviewtime values('Th', 11);
+insert into reviewtime values('Th', 12);
+insert into reviewtime values('Th', 13);
+insert into reviewtime values('Th', 14);
+insert into reviewtime values('Th', 15);
+insert into reviewtime values('Th', 16);
+insert into reviewtime values('Th', 17);
+insert into reviewtime values('Th', 18);
+insert into reviewtime values('Th', 19);
+insert into reviewtime values('Th', 20);
+insert into reviewtime values('Th', 21);
+insert into reviewtime values('Th', 22);
+insert into reviewtime values('Th', 23);
+
+insert into reviewtime values('F', 0);
+insert into reviewtime values('F', 1);
+insert into reviewtime values('F', 2);
+insert into reviewtime values('F', 3);
+insert into reviewtime values('F', 4);
+insert into reviewtime values('F', 5);
+insert into reviewtime values('F', 6);
+insert into reviewtime values('F', 7);
+insert into reviewtime values('F', 8);
+insert into reviewtime values('F', 9);
+insert into reviewtime values('F', 10);
+insert into reviewtime values('F', 11);
+insert into reviewtime values('F', 12);
+insert into reviewtime values('F', 13);
+insert into reviewtime values('F', 14);
+insert into reviewtime values('F', 15);
+insert into reviewtime values('F', 16);
+insert into reviewtime values('F', 17);
+insert into reviewtime values('F', 18);
+insert into reviewtime values('F', 19);
+insert into reviewtime values('F', 20);
+insert into reviewtime values('F', 21);
+insert into reviewtime values('F', 22);
+insert into reviewtime values('F', 23);
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

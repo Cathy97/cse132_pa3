@@ -17,6 +17,8 @@
             <%
                 try {
                     // Load Oracle Driver class file
+                        
+                    // Load Oracle Driver class file
                     Class.forName("org.postgresql.Driver");
                     String dbURL = "jdbc:postgresql:cse132b?user=postgres&password=admin";
                     Connection conn = DriverManager.getConnection(dbURL);
@@ -42,7 +44,7 @@
 						pstmt.setInt(1, ssn);
 						ResultSet rs = pstmt.executeQuery();
 						%>
-						<table border="0"><th><font face = "Monospace" size = "6">STUDENT <%= request.getParameter("")%> conflits with the following sections</font></th></table>
+						<table border="0"><th><font face = "Monospace" size = "6">STUDENT <%= request.getParameter("SSN")%> conflits with the following sections</font></th></table>
 						<%
 						//get each section info from MEETING table
 						while(rs.next()){
@@ -294,7 +296,7 @@
                                 <% 
                                     while ( students.next() ){
                                 %>
-                                     <option value="<%= students.getString("SSN") %>"><%= students.getString("SSN") %> | <%= students.getString("FIRSTNAME") %>, <%= students.getString("MIDDLENAME") %>, <%= students.getString("LASTNAME") %></option>
+                                     <option value=<%= students.getString("SSN") %>><%= students.getString("SSN") %> | <%= students.getString("FIRSTNAME") %>, <%= students.getString("MIDDLENAME") %>, <%= students.getString("LASTNAME") %></option>
                                 <%
                                     }
                                 %>
@@ -311,7 +313,7 @@
 				</table>
 				<table border="1">	
                     <tr>
-                        <th>Student SSN</th>
+                        <th>Student ID</th>
 						<th>First Name</th>
 						<th>Middle Name</th>
                         <th>Last Name</th>
@@ -324,7 +326,7 @@
             %>
                     <tr>
 
-						<%-- Get the SSN, which is a number --%>
+						<%-- Get the ID, which is a number --%>
 						<td align="middle">
 							<input value="<%= rs.getInt("SSN") %>" 
 								name="SSN" size="10" readonly>
