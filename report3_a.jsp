@@ -26,7 +26,7 @@
 				<%
 				// Create the statement
 				Statement statement = conn.createStatement();
-				ResultSet c_rs = statement.executeQuery("SELECT DISTINCT SECTION.COURSE_NUM, SECTION.YEAR, SECTION.QUARTER, SECTION.FACULTY_NAME FROM SECTION");				
+				ResultSet c_rs = statement.executeQuery("SELECT DISTINCT T.COURSE_NUM, C.YEAR, T.QUARTER, T.FACULTY_NAME FROM CLASS C, TAKEN T WHERE C.COURSE_NUM = T.COURSE_NUM AND C.QUARTER = T.QUARTER");				
 				%>
 				<!-- Add an HTML table header row to format the results -->
 				<table border="0"><th><font face = "Arial Black" size = "6">Report III - part a</font></th></table>
@@ -39,11 +39,11 @@
 							<select name = "selection">
 								<% 
 									while (c_rs.next()){
-										if(!(c_rs.getString("QUARTER").equals("Spring") && c_rs.getInt("YEAR") == 2018)){
+										
 								%>
 									 <option value="<%= c_rs.getString("COURSE_NUM") %>,<%= c_rs.getString("QUARTER") %>,<%= c_rs.getInt("YEAR") %>,<%= c_rs.getString("FACULTY_NAME") %>"><%= c_rs.getString("COURSE_NUM") %> | <%= c_rs.getString("QUARTER") %> <%= c_rs.getInt("YEAR") %> - <%= c_rs.getString("FACULTY_NAME") %></option>	
 								<%
-										}
+									
 									}
 								%>
 								 
@@ -74,18 +74,13 @@
 					String faculty_name = tokens[3];
 				
 					//get the section ID from the selection
-					PreparedStatement pstmt = conn.prepareStatement("SELECT SECTION_ID FROM SECTION WHERE COURSE_NUM = ? AND FACULTY_NAME = ? AND QUARTER = ? AND YEAR = ?");
+					PreparedStatement pstmt = conn.prepareStatement("SELECT GRADE FROM TAKEN WHERE COURSE_NUM = ? AND FACULTY_NAME = ?");
 					pstmt.setString(1, course_num);
 					pstmt.setString(2, faculty_name);
-					pstmt.setString(3, quarter);
-					pstmt.setInt(4, Integer.parseInt(year));
 
-					ResultSet rs = pstmt.executeQuery();			
+					ResultSet stempRS = pstmt.executeQuery();			
 					
 					//get the section ID
-					int sectionID = 0;						
-					if(rs.next())
-						sectionID = rs.getInt("SECTION_ID");
 					
 					int a_grade = 0;
 					int b_grade = 0;
@@ -95,9 +90,6 @@
 					
 					
 					//get all students who took this section in the past and count the grades
-					PreparedStatement stemp = conn.prepareStatement("SELECT GRADE FROM TAKEN WHERE SECTION_ID = ?");
-					stemp.setInt(1, sectionID);
-					ResultSet stempRS = stemp.executeQuery();
 					
 					%>
 						<table border="0"><th><font face = "Monospace" size = "6">Course ID <%= course_num%> <%= faculty_name%> <%= quarter%> <%= year%></font></th></table>
@@ -137,7 +129,6 @@
 							
 			<%				
 					stempRS.close();
-					rs.close();
 					//Commit transaction					
 					conn.commit();
 					conn.setAutoCommit(true);				

@@ -20,13 +20,12 @@
 				Class.forName("org.postgresql.Driver");
                     String dbURL = "jdbc:postgresql:cse132b?user=postgres&password=admin";
                     Connection conn = DriverManager.getConnection(dbURL);
-
             %>
 			
 				<%
 				// Create the statement
 				Statement statement = conn.createStatement();
-				ResultSet c_rs = statement.executeQuery("SELECT DISTINCT SECTION.COURSE_NUM, SECTION.FACULTY_NAME FROM SECTION WHERE ((YEAR != 2018 AND QUARTER <> 'Spring') OR (YEAR < 2018))");				
+				ResultSet c_rs = statement.executeQuery("SELECT DISTINCT TAKEN.COURSE_NUM, TAKEN.FACULTY_NAME FROM TAKEN WHERE QUARTER <> 'sp2018' AND YEAR < 2019");				
 				%>
 				<!-- Add an HTML table header row to format the results -->
 				<table border="0"><th><font face = "Arial Black" size = "6">Report III - part b</font></th></table>
@@ -63,17 +62,15 @@
 				if (action != null && action.equals("choose")) {
 						
 					conn.setAutoCommit(false); 
-
 					String before_parse = request.getParameter("selection");
 					String[] tokens = before_parse.split(",");
 					String course_num = tokens[0];
 					String faculty_name = tokens[1];
 				
 					//get the section ID from the selection
-					PreparedStatement pstmt = conn.prepareStatement("SELECT DISTINCT YEAR FROM SECTION WHERE COURSE_NUM = ? AND FACULTY_NAME = ? AND ((YEAR != 2018 AND QUARTER <> 'Spring') OR (YEAR < 2018))");
+					PreparedStatement pstmt = conn.prepareStatement("SELECT DISTINCT YEAR FROM TAKEN WHERE COURSE_NUM = ? AND FACULTY_NAME = ? AND QUARTER <> 'sp2018' AND YEAR < 2019");
 					pstmt.setString(1, course_num);
 					pstmt.setString(2, faculty_name);
-
 					ResultSet rs = pstmt.executeQuery();	
 					
 					int a_grade = 0;
@@ -84,12 +81,12 @@
 					
 					//loop for each year
 					while(rs.next()){
-						PreparedStatement subquery = conn.prepareStatement("SELECT SECTION_ID FROM SECTION WHERE COURSE_NUM = ? AND FACULTY_NAME = ? AND YEAR = ?");
+						PreparedStatement subquery = conn.prepareStatement("SELECT GRADE FROM TAKEN WHERE COURSE_NUM = ? AND FACULTY_NAME = ? AND YEAR = ?");
 						subquery.setString(1, course_num);
 						subquery.setString(2, faculty_name);
 						subquery.setInt(3, rs.getInt("YEAR"));
 						
-						ResultSet y_rs = subquery.executeQuery();
+						ResultSet stempRS = subquery.executeQuery();
 						
 						int atemp = 0;
 						int btemp = 0;
@@ -97,12 +94,7 @@
 						int dtemp = 0;
 						int othertemp = 0;
 						
-						while(y_rs.next()){
-							//get all students who took this section in the past and count the grades
-							PreparedStatement stemp = conn.prepareStatement("SELECT GRADE FROM TAKEN WHERE SECTION_ID = ?");
-							stemp.setInt(1, y_rs.getInt("SECTION_ID"));
-							ResultSet stempRS = stemp.executeQuery();
-							
+						
 							while(stempRS.next()){	
 								if(stempRS.getString("GRADE").contains("A")){
 									a_grade++;
@@ -124,11 +116,12 @@
 									other++;
 									othertemp++;
 								}
+
+
 							}
 							stempRS.close();
-						}
 						
-						%>
+						    %>
 							<table border="0"><th><font face = "Monospace" size = "6"><%= rs.getInt("YEAR")%></font></th></table>
 							<table border="0">
 							<tr>
@@ -148,9 +141,10 @@
 							</tr>
 							</table>
 								
-						<%							
+						<%	
+												
 																			
-						y_rs.close();
+						
 					}
 					
 					
