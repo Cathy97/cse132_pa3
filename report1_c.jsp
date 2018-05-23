@@ -67,14 +67,14 @@
                         columnCount1 = rsmd1.getColumnCount();
 
                         PreparedStatement pstmt2 = conn.prepareStatement(
-                            "SELECT DISTINCT CL.QUARTER AS QUARTER, CL.YEAR AS YEAR, SUM(GC.NUMBER_GRADE)/COUNT(*) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC, CLASS CL WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE AND T.QUARTER = CL.QUARTER AND T.COURSE_NUM = CL.COURSE_NUM GROUP BY CL.QUARTER, CL.YEAR");
+                            "SELECT DISTINCT CL.QUARTER AS QUARTER, CL.YEAR AS YEAR, SUM(GC.NUMBER_GRADE * T.UNITS)/SUM(T.UNITS) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC, CLASS CL WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE AND T.QUARTER = CL.QUARTER AND T.COURSE_NUM = CL.COURSE_NUM GROUP BY CL.QUARTER, CL.YEAR");
                         pstmt2.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs2 = pstmt2.executeQuery();
                         rsmd2 = rs2.getMetaData();
                         columnCount = rsmd2.getColumnCount();
 
                         PreparedStatement pstmt4 = conn.prepareStatement(
-                            "SELECT DISTINCT SUM(GC.NUMBER_GRADE)/COUNT(*) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE GROUP BY T.SSN");
+                            "SELECT DISTINCT SUM(GC.NUMBER_GRADE*T.UNITS)/SUM(T.UNITS) AS GPA FROM TAKEN T, STUDENT ST, GRADE_CONVERSION GC WHERE ST.SSN = ? AND ST.SSN = T.SSN AND T.GRADE = GC.LETTER_GRADE GROUP BY T.SSN");
                         pstmt4.setInt(1, Integer.parseInt(request.getParameter("SSN")));
                         rs4 = pstmt4.executeQuery();
                         rsmd4 = rs4.getMetaData();
